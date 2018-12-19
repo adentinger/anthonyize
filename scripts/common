@@ -3,6 +3,10 @@
 # Script sourced by all other scripts. Used e.g. to
 # set variables common to all scripts.
 
+# Root of the Git repo
 GIT_ROOT=$(git rev-parse --show-toplevel)
+# Directory containing the scripts
+SCRIPTS_DIR="${GIT_ROOT}/scripts"
+# Directory containing the config files
 CONFIG_DIR="${GIT_ROOT}/config"
 
