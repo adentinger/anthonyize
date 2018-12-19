@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+GIT_ROOT=$(git rev-parse --show-toplevel)
+CONFIG_DIR="${GIT_ROOT}/config"
+
+installConfigFiles() {
+    sudo rsync -ru "${CONFIG_DIR}" /
+}
+
