@@ -2,10 +2,9 @@
 # Script which is meant to be executed as sudo.
 
 THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-source "${THIS_SCRIPT_DIR}/scripts/common"
+source "${THIS_SCRIPT_DIR}/common"
 
 createFlagFile() {
-    message $'\nCreating anthonyzation flag...\n'
     mkdir -p $(dirname "${ANTHONYZATION_FLAG}")
     echo > "${ANTHONYZATION_FLAG}"
 
