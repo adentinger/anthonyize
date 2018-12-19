@@ -5,7 +5,26 @@ source "${THIS_SCRIPT_DIR}/scripts/common"
 
 source "${SCRIPTS_DIR}/config"
 
+createFlagFile() {
+    if [ $(id -u) != 0 ]; then
+        message $'\Creating anthonyzation flag...\n'
+        sudo setupBashRc
+    else
+        mkdir -p $(dirname "${ANTHONYZATION_FLAG}")
+        echo > "${ANTHONYZATION_FLAG}"
+
+        echo '# ==============================================================================' >> "${ANTHONYZATION_FLAG}"
+        echo '# =                      CREATED BY ANTHONYZATION SCRIPT                       =' >> "${ANTHONYZATION_FLAG}"
+        echo '# =                 https://github.com/AnthonyD973/Anthonyize                  =' >> "${ANTHONYZATION_FLAG}"
+        echo '# ==============================================================================' >> "${ANTHONYZATION_FLAG}"
+        echo >> "${ANTHONYZATION_FLAG}"
+        echo 'The presence of this file indicates that the Anthonyzation script' >> "${ANTHONYZATION_FLAG}"
+        echo 'was run on this system, although this does not guarantee completion.' >> "${ANTHONYZATION_FLAG}"
+    fi
+}
+
 anthonyize() {
+    createFlagFile
     installConfigFiles
 }
 

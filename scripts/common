@@ -13,6 +13,9 @@ GIT_ROOT=$(git rev-parse --show-toplevel)
 SCRIPTS_DIR="${GIT_ROOT}/scripts"
 # Directory containing the config files
 CONFIG_DIR="${GIT_ROOT}/config"
+# File indicating that the anthonyzation script was run (but does not guarantee
+# it was completed).
+ANTHONYZATION_FLAG="/etc/anthonyzation.d/anthonyzation-was-run"
 
 # =============================================================================
 # =                              FUNCTION DEFINITIONS                         #
