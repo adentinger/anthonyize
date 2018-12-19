@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Script sourced by all other scripts. Used e.g. to
+# set variables common to all scripts.
+
+GIT_ROOT=$(git rev-parse --show-toplevel)
+CONFIG_DIR="${GIT_ROOT}/config"
+
