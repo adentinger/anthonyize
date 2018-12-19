@@ -7,21 +7,7 @@ source "${SCRIPTS_DIR}/config"
 source "${SCRIPTS_DIR}/cli"
 
 createFlagFile() {
-    if [ $(id -u) != 0 ]; then
-        message $'\nCreating anthonyzation flag...\n'
-        sudo setupBashRc
-    else
-        mkdir -p $(dirname "${ANTHONYZATION_FLAG}")
-        echo > "${ANTHONYZATION_FLAG}"
-
-        echo '# ==============================================================================' >> "${ANTHONYZATION_FLAG}"
-        echo '# =                      CREATED BY ANTHONYZATION SCRIPT                       =' >> "${ANTHONYZATION_FLAG}"
-        echo '# =                 https://github.com/AnthonyD973/Anthonyize                  =' >> "${ANTHONYZATION_FLAG}"
-        echo '# ==============================================================================' >> "${ANTHONYZATION_FLAG}"
-        echo >> "${ANTHONYZATION_FLAG}"
-        echo 'The presence of this file indicates that the Anthonyzation script' >> "${ANTHONYZATION_FLAG}"
-        echo 'was run on this system, although this does not guarantee completion.' >> "${ANTHONYZATION_FLAG}"
-    fi
+    sudo source "${SCRIPTS_DIR}/anthonyize-create-flag-file"
 }
 
 anthonyize() {
