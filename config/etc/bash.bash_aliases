@@ -12,6 +12,7 @@ alias cdd='cd "$HOME/Desktop"'
 alias cd..='cd ..'
 
 alias g='git'
+alias nano='nano -mwxET 4'
 
 alias grep='grep --color=auto'
 alias l='ls -A --color=auto'
