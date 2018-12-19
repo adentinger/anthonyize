@@ -6,7 +6,8 @@ source "${THIS_SCRIPT_DIR}/common"
 
 # Append changes the bash.bashrc file whitout being too intrusive.
 setupBashrc() {
-    sudo source "${SCRIPTS_DIR}/cli-setup-bashrc"
+    message $'\nSetting up bashrc\n'
+    sudo bash -c "source \"${SCRIPTS_DIR}/cli-setup-bashrc\""
 }
 
 # Sets up bash

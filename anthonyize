@@ -7,7 +7,8 @@ source "${SCRIPTS_DIR}/config"
 source "${SCRIPTS_DIR}/cli"
 
 createFlagFile() {
-    sudo source "${SCRIPTS_DIR}/anthonyize-create-flag-file"
+    message $'\nCreating anthonyzation flag...\n'
+    sudo bash -c "source \"${SCRIPTS_DIR}/anthonyize-create-flag-file\""
 }
 
 anthonyize() {
