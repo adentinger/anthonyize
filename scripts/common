@@ -3,10 +3,36 @@
 # Script sourced by all other scripts. Used e.g. to
 # set variables common to all scripts.
 
+# =============================================================================
+# =                            VARIABLE DEFINITIONS                           #
+# =============================================================================
+
 # Root of the Git repo
 GIT_ROOT=$(git rev-parse --show-toplevel)
 # Directory containing the scripts
 SCRIPTS_DIR="${GIT_ROOT}/scripts"
 # Directory containing the config files
 CONFIG_DIR="${GIT_ROOT}/config"
+
+# =============================================================================
+# =                              FUNCTION DEFINITIONS                         #
+# =============================================================================
+
+
+# EXPECTED PARAMS:
+# any amount
+message() {
+    echo -n -e '\e[1;92m'
+    echo "$@"
+    echo -n -e  '\e[0m'
+}
+
+# EXPECTED PARAMS:
+# any amount
+messageError() {
+    echo -n -e '\e[1;91m'
+    echo "$@" >&2
+    echo -n -e '\e[0m'
+    false
+}
 
