@@ -1,5 +1,10 @@
 # No shell specified ; this can be executed by both bash and sh.
 
+# ==============================================================================
+# =                      CREATED BY ANTHONYZATION SCRIPT                       =
+# =                 https://github.com/AnthonyD973/Anthonyize                  =
+# ==============================================================================
+
 alias cls='clear'
 
 alias cdg='cd "$HOME/Git"'

@@ -1,8 +1,9 @@
 #!/bin/bash
 
-################################
-# CREATED BY ANTHONY DENTINGER #
-################################
+# ==============================================================================
+# =                      CREATED BY ANTHONYZATION SCRIPT                       =
+# =                 https://github.com/AnthonyD973/Anthonyize                  =
+# ==============================================================================
 
 source /etc/bash_completion.d/bash_alias_completion
 
