@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Copy the config files to the system.
 
 THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 source "${THIS_SCRIPT_DIR}/common"
