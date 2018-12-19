@@ -5,26 +5,11 @@ THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 source "${THIS_SCRIPT_DIR}/common"
 
 # Append changes the bash.bashrc file whitout being too intrusive.
-setupBashRc() {
-    if [ $(id -u) != 0 ]; then
-        message $'\nSetting up bashrc\n'
-        sudo setupBashRc
-    else
-        local BASHRC_FILE="$/etc/bash.bashrc"
-        echo >> "${BASHRC_FILE}" # In case there was no empty line beforehand
-        echo '# ==============================================================================' >> "${BASHRC_FILE}"
-        echo '# =                        ADDED BY ANTHONYZATION SCRIPT                       =' >> "${BASHRC_FILE}"
-        echo '# =                 https://github.com/AnthonyD973/Anthonyize                  =' >> "${BASHRC_FILE}"
-        echo '# ==============================================================================' >> "${BASHRC_FILE}"
-        echo 'source /etc/bash.bash_aliases # Setup aliases' >> "${BASHRC_FILE}"
-        echo >> "${BASHRC_FILE}"
-        echo '# Makes the prompt look like an Ubuntu prompt' >> "${BASHRC_FILE}"
-        echo $'export PS1=\'\[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$\'' >> "${BASHRC_FILE}"
-    fi
+setupBashrc() {
+    sudo source "${SCRIPTS_DIR}/cli-setup-bashrc"
 }
 
 # Sets up bash
 setupCli() {
-    setupBashRc
+    setupBashrc
 }
-
