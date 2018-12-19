@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Configures various commands
+
+THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+source "${THIS_SCRIPT_DIR}/common"
+
+configureGit() {
+    git config --global alias.confg 'config --global'
+    git confg push.default simple
+    git confg user.name 'Anthony Dentinger'
+    git confg user.email 'anthony.dentinger@polymtl.ca'
+    git confg alias.h 'log --graph --decorate --glob=*'
+    git confg alias.c commit
+    git confg alias.cam 'commit --amend'
+    git confg alias.t tag
+    git confg alias.p pull
+    git confg alias.a 'add -A'
+    git confg alias.s status
+    git confg alias.m merge
+    git confg alias.ma 'merge --abort'
+    git confg alias.reb rebase
+    git confg alias.rebc 'rebase --continue'
+    git confg alias.reba 'rebase --abort'
+    git confg alias.cp cherry-pick
+    git confg alias.cpc 'cherry-pick --continue'
+    git confg alias.cpa 'cherry-pick --abort'
+    git confg alias.wc whatchanged
+    git confg alias.f fetch
+    git confg alias.d diff
+    git confg alias.r reset
+    git confg alias.st stash
+    git confg alias.ch checkout
+    git confg alias.cl clone
+    git confg alias.b branch
+    git confg alias.bis bisect
+    git confg alias.subm submodule
+    git confg alias.rev revert
+}
+
+configureCommands() {
+    configureGit
+}
