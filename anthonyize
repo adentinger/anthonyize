@@ -6,6 +6,7 @@ source "${THIS_SCRIPT_DIR}/scripts/common"
 source "${SCRIPTS_DIR}/conffiles"
 source "${SCRIPTS_DIR}/cli"
 source "${SCRIPTS_DIR}/commands"
+source "${SCRIPTS_DIR}/fs"
 
 createFlagFile() {
     message $'\nCreating anthonyzation flag...\n'
@@ -14,6 +15,7 @@ createFlagFile() {
 
 anthonyize() {
     createFlagFile
+    tweakFilesystem
     installConfigFiles
     setupCli
     configureCommands
