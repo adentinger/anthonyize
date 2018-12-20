@@ -3,7 +3,7 @@
 THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 source "${THIS_SCRIPT_DIR}/scripts/common"
 
-source "${SCRIPTS_DIR}/config"
+source "${SCRIPTS_DIR}/conffiles"
 source "${SCRIPTS_DIR}/cli"
 source "${SCRIPTS_DIR}/commands"
 
