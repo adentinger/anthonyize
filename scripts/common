@@ -7,8 +7,10 @@
 # =                            VARIABLE DEFINITIONS                           #
 # =============================================================================
 
+# Directory containing this script
+THIS_SCRIPT_DIR="$(cd "$(dirname ${BASH_SOURCE[0]})" > /dev/null && pwd)"
 # Root of the Git repo
-GIT_ROOT=$(git rev-parse --show-toplevel)
+GIT_ROOT="${THIS_SCRIPT_DIR}/.."
 # Directory containing the scripts
 SCRIPTS_DIR="${GIT_ROOT}/scripts"
 # Directory containing the config files
