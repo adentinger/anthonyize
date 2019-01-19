@@ -6,6 +6,7 @@ source "${THIS_SCRIPT_DIR}/common"
 
 configureGit() {
     git config --global alias.confg 'config --global'
+    git confg color.ui auto
     git confg push.default simple
     git confg user.name 'Anthony Dentinger'
     git confg user.email 'anthony.dentinger@polymtl.ca'
