@@ -5,7 +5,19 @@ THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 source "${THIS_SCRIPT_DIR}/common"
 
 setupBashrc() {
-    local BASHRC_FILE="/etc/bash.bashrc"
+    local BASHRC_PLACES=("/etc/bashrc" "/etc/bash.bashrc" "/etc/bash.bashrc.local")
+    for bashrc in "${BASHRC_PLACES[@]}"; do
+        if [ -f "${bashrc}" ]; then
+            local BASHRC_FILE="${bashrc}"
+            break
+        fi
+    done
+
+    if [ "${BASHRC_FILE}" == "" ]; then
+        messageError $'\nCannot find bashrc file.\n'
+        exit 1
+    fi
+
     echo >> "${BASHRC_FILE}" # In case there was no empty line beforehand
     echo '# ==============================================================================' >> "${BASHRC_FILE}"
     echo '# =                        ADDED BY ANTHONYZATION SCRIPT                       =' >> "${BASHRC_FILE}"
