@@ -6,6 +6,7 @@ source "${THIS_SCRIPT_DIR}/common"
 
 configureGit() {
     git config --global alias.confg 'config --global'
+    git confg core.editor nano
     git confg alias.conf config
     git confg color.ui auto
     git confg push.default simple
@@ -37,6 +38,7 @@ configureGit() {
     git confg alias.bis bisect
     git confg alias.subm submodule
     git confg alias.rev revert
+    git confg alias.fp format-patch
 }
 
 configureCommands() {
