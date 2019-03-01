@@ -27,7 +27,7 @@ configureGit() {
     git confg alias.cp cherry-pick
     git confg alias.cpc 'cherry-pick --continue'
     git confg alias.cpa 'cherry-pick --abort'
-    git confg alias.wc whatchanged
+    git confg alias.wc 'whatchanged --graph --decorate --glob="*"'
     git confg alias.f fetch
     git confg alias.d diff
     git confg alias.r reset
