@@ -24,9 +24,11 @@ configureGit() {
     git confg alias.reb rebase
     git confg alias.rebc 'rebase --continue'
     git confg alias.reba 'rebase --abort'
+    git confg alias.rebs 'rebase --skip'
     git confg alias.cp cherry-pick
     git confg alias.cpc 'cherry-pick --continue'
     git confg alias.cpa 'cherry-pick --abort'
+    git confg alias.cps 'cherry-pick --skip'
     git confg alias.wc 'whatchanged --graph --decorate --glob="*"'
     git confg alias.f fetch
     git confg alias.d diff
