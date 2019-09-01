@@ -14,11 +14,11 @@ createFlagFile() {
 }
 
 anthonyize() {
-    createFlagFile
     tweakFilesystem
     installConfigFiles
     setupCli
     configureCommands
+    createFlagFile
 }
 
 anthonyize
