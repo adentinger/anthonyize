@@ -10,7 +10,7 @@ source "${SCRIPTS_DIR}/fs"
 
 createFlagFile() {
     message $'\nCreating anthonyzation flag...\n'
-    sudo bash -c "source \"${SCRIPTS_DIR}/anthonyize-create-flag-file\""
+    superUserDo bash -c "source \"${SCRIPTS_DIR}/anthonyize-create-flag-file\""
 }
 
 anthonyize() {

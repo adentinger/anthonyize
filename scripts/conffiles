@@ -6,6 +6,6 @@ source "${THIS_SCRIPT_DIR}/common"
 
 installConfigFiles() {
     message $'\nInstalling configuration files.\n'
-    sudo rsync -ruv "${CONFIG_DIR}/" /
+    superUserDo rsync -ruv "${CONFIG_DIR}/" /
 }
 
