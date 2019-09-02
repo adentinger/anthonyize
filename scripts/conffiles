@@ -6,6 +6,5 @@ source "${THIS_SCRIPT_DIR}/common"
 
 installConfigFiles() {
     message $'\nInstalling configuration files.\n'
-    superUserDo rsync -ruv "${CONFIG_DIR}/" /
+    superUserDo cp -ruv "${CONFIG_DIR}/"* /
 }
-

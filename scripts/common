@@ -4,7 +4,7 @@
 # set variables common to all scripts.
 
 # =============================================================================
-# =                            VARIABLE DEFINITIONS                           #
+# =                            VARIABLE DEFINITIONS                           =
 # =============================================================================
 
 # Directory containing this script
@@ -19,7 +19,7 @@ CONFIG_DIR="${GIT_ROOT}/config"
 ANTHONYZATION_FLAG="/etc/anthonyzation.d/anthonyzation-was-run"
 
 # =============================================================================
-# =                              FUNCTION DEFINITIONS                         #
+# =                              FUNCTION DEFINITIONS                         =
 # =============================================================================
 
 # EXPECTED PARAMS:
@@ -54,7 +54,7 @@ checkParamNum() {
 # EXPECTED PARAMS:
 # None
 setSystemInfo() {
-    checkParamNum 0 $#
+    checkParamNum 0 $# || exit 1
 
     # BASED ON https://unix.stackexchange.com/questions/6345/how-can-i-get-distribution-name-and-version-number-in-a-simple-shell-script
     if [ -f /etc/os-release ]; then
