@@ -1,6 +1,6 @@
 # Anthonyize
 
-Configure Linux system according to my habits.
+Configure Linux/MSYS/Git Bash/Cygwin system according to my habits.
 
 ## Usage
 
