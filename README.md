@@ -1,5 +1,13 @@
 # Anthonyize
+
 Configure Linux system according to my habits.
+
+## Usage
+
+```bash
+./anthonyize
+exec bash # Do in each open shell, or restart them.
+```
 
 ## Privilege-escalation warning
 
