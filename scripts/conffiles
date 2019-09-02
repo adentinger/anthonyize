@@ -22,9 +22,9 @@ installConfigFiles() {
     while read -r file; do
         local fileRelative="$(realpath -s --relative-to="${CONFIG_DIR}" "${file}")"
         local fileDestination="/${fileRelative}"
-        superUserDo sed \
+        sed \
             -e 's~__COMPLETION_FUNCTION_BODY__~'"${__COMPLETION_FUNCTION_BODY__}"'~g' \
             "${file}" \
-            > "${fileDestination}"
+            | superUserDo tee "${fileDestination}" >/dev/null
     done < <(find "${CONFIG_DIR}" -type f)
 }
