@@ -97,7 +97,13 @@ setSystemInfo() {
 # any amount
 superUserDo() {
     if [ "${OS}" == GNU/Linux ]; then
-        sudo "$@"
+        # Linux machine
+        if [ "$(whoami)" != root ]; then
+            sudo "$@"
+        else
+            # Don't require password if we're already root.
+            "$@"
+        fi
     else
         # Might be in Cygwin or MinGW, which don't have sudo.
         "$@"
