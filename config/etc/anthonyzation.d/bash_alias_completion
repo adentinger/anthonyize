@@ -4,9 +4,14 @@
 # =                      CREATED BY ANTHONYZATION SCRIPT                       =
 # =                 https://github.com/AnthonyD973/Anthonyize                  =
 # =                                                                            =
-# =                         SHAMELESSLY COPIED FROM                            =
+# =                    SHAMELESSLY COPIED AND MODIFIED FROM                    =
 # = https://github.com/cykerway/complete-alias/blob/master/completions/bash_completion.sh =
 # ==============================================================================
+
+
+_anthonyzation_default_completion_loader() {
+__COMPLETION_FUNCTION_BODY__
+}
 
 # Copyright (C) 2016-2017 Cyker Way
 #
@@ -277,7 +282,7 @@ _set_default_completion () {
             complete -F _longopt "$cmd"
             ;;
         *)
-            _completion_loader "$cmd"
+            _anthonyzation_default_completion_loader "$cmd"
             ;;
     esac
 }
@@ -330,7 +335,8 @@ _complete_alias () {
     _set_default_completion "$cmd"
 
     # Do actual completion.
-    _command_offset 0
+    _command_offset 0 2> /dev/null  # _command_offset is part of the bash_completion package
+                                    # which is not installed on MinGW or Cygwin.
 
     # Decrease _use_alias refcnt.
     (( _use_alias-- ))
@@ -339,11 +345,46 @@ _complete_alias () {
     complete -F _complete_alias "$cmd"
 }
 
+# Sets autocomplete for an alias
+_add_completion_for_alias() {
+    if [ $# != 1 ]; then
+        echo 'Cannot add completion for alias: No alias specified.' >&2
+        exit 1
+    fi
+
+    local alias="${1}"
+
+    cmd=("${alias}")
+    while alias "${cmd[0]}" >/dev/null 2>&1; do
+        local oldProgram="${cmd[0]}"
+
+        # This decomposition is not perfect if the command has arguments
+        # with whitespaces.
+        local cmd=( $(alias "${alias}" | grep -oP $'(?<=\').*(?=\')') )
+
+        # In case the alias is a replacement of a command (e.g. alias ls='ls --color=auto')
+        if [ "${cmd[0]}" == "${oldProgram}" ]; then
+            break
+        fi
+    done
+    local program="${cmd[0]}"
+
+    # We "cheat" so that it works for Git Bash: We autocomplete only if the alias
+    # consists of a program name with no arguments. Git Bash doesn't seem to have
+    # bash-completion functions, which are used by "_complete_alias".
+    if [ "${#cmd[@]}" -eq 1 ] && complete -p "${program}" >/dev/null 2>&1; then
+        local program_completion="$(complete -p "${program}" | grep -oP '.*(?=\s+\S+$)') ${alias}"
+        ${program_completion}
+    else
+        complete -F _complete_alias "${alias}"
+    fi
+}
+
 # Set alias completions.
 #
 # Uncomment and edit these lines to add your own alias completions.
+# NOTE: The Anthonyzation script does this inside bash_completion.d/alias_completion .
 #
-#complete -F _complete_alias myalias1
-#complete -F _complete_alias myalias2
-#complete -F _complete_alias myalias3
-
+# _add_completion_for_alias myalias1
+# _add_completion_for_alias myalias2
+# _add_completion_for_alias myalias3

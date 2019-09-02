@@ -5,13 +5,13 @@
 # =                 https://github.com/AnthonyD973/Anthonyize                  =
 # ==============================================================================
 
-source /etc/bash_completion.d/bash_alias_completion
+source /etc/anthonyzation.d/bash_alias_completion
 
 # EXPECTED PARAMS :
 # 1 : the alias to autocomplete
 completeAlias() {
     ALIAS="${1}"
-    complete -F _complete_alias "${ALIAS}"
+    _add_completion_for_alias "${ALIAS}"
 }
 
 for alias in $(grep -Po '^alias\s+\w+(?==)' /etc/anthonyzation.d/bash.bash_aliases | grep -Po '(?<=\s)\w+'); do
