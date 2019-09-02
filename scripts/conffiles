@@ -13,17 +13,17 @@ installConfigFiles() {
 
     # In the copied files, replace some parts of text depending on the current system.
     if [ "${OS}" == GNU/Linux ]; then
-        local __COMPLETION_FUNCTION_BODY__=$'    local cmd="\${1}"\n    _completion_loader "\${cmd}"'
+        local __COMPLETION_FUNCTION_BODY__=$'    local cmd="\${1}"\\\n    _completion_loader "\${cmd}"'
     else
         # Need to escape the '$' and '\' because this string is interpreted by perl.
-        local __COMPLETION_FUNCTION_BODY__=$'    local cmd="\${1}"\n    local completion_command="\$(complete -p "\${cmd}")" | grep -oP \'.*(?=\\\\s+\\\\S+\$)\'\n    \${completion_command}'
+        local __COMPLETION_FUNCTION_BODY__=$'    local cmd="\${1}"\\\n    local completion_command="\$(complete -p "\${cmd}")" | grep -oP \'.*(?=\\\\s+\\\\S+\$)\'\\\n    \${completion_command}'
     fi
 
     while read -r file; do
         local fileRelative="$(realpath -s --relative-to="${CONFIG_DIR}" "${file}")"
         local fileDestination="/${fileRelative}"
-        superUserDo perl \
-            -pe 's~__COMPLETION_FUNCTION_BODY__~'"${__COMPLETION_FUNCTION_BODY__}"'~g' \
+        superUserDo sed \
+            -e 's~__COMPLETION_FUNCTION_BODY__~'"${__COMPLETION_FUNCTION_BODY__}"'~g' \
             "${file}" \
             > "${fileDestination}"
     done < <(find "${CONFIG_DIR}" -type f)
