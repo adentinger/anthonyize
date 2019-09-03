@@ -14,7 +14,7 @@ createFlagFile() {
     echo '# ==============================================================================' >> "${ANTHONYZATION_FLAG}"
     echo >> "${ANTHONYZATION_FLAG}"
     echo 'The presence of this file indicates that the Anthonyzation script' >> "${ANTHONYZATION_FLAG}"
-    echo 'was run on this system, although this does not guarantee completion.' >> "${ANTHONYZATION_FLAG}"
+    echo 'was run on this system.' >> "${ANTHONYZATION_FLAG}"
 }
 
 createFlagFile
