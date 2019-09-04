@@ -27,7 +27,7 @@ ANTHONYZATION_FLAG="/etc/anthonyzation.d/anthonyzation-was-run"
 message() {
     echo -n -e '\e[1;92m'
     echo "$@"
-    echo -n -e  '\e[0m'
+    echo -n -e '\e[0m'
 }
 
 # EXPECTED PARAMS:
@@ -110,4 +110,13 @@ superUserDo() {
     fi
 }
 
+checkFlagFileExistance() {
+    if [ -f "${ANTHONYZATION_FLAG}" ]; then
+        UPDATE_ANTHONYZATION="y"
+    else
+        unset UPDATE_ANTHONYZATION
+    fi
+}
+
 setSystemInfo
+checkFlagFileExistance

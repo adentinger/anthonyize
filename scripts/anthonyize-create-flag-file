@@ -5,16 +5,18 @@ THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 source "${THIS_SCRIPT_DIR}/common"
 
 createFlagFile() {
-    mkdir -p $(dirname "${ANTHONYZATION_FLAG}")
-    echo > "${ANTHONYZATION_FLAG}"
+    if [ ! -z "${UPDATE_ANTHONYZATION}" ]; then
+        mkdir -p $(dirname "${ANTHONYZATION_FLAG}")
+        echo > "${ANTHONYZATION_FLAG}"
 
-    echo '# ==============================================================================' >> "${ANTHONYZATION_FLAG}"
-    echo '# =                      CREATED BY ANTHONYZATION SCRIPT                       =' >> "${ANTHONYZATION_FLAG}"
-    echo '# =                 https://github.com/AnthonyD973/Anthonyize                  =' >> "${ANTHONYZATION_FLAG}"
-    echo '# ==============================================================================' >> "${ANTHONYZATION_FLAG}"
-    echo >> "${ANTHONYZATION_FLAG}"
-    echo 'The presence of this file indicates that the Anthonyzation script' >> "${ANTHONYZATION_FLAG}"
-    echo 'was run on this system.' >> "${ANTHONYZATION_FLAG}"
+        echo '# ==============================================================================' >> "${ANTHONYZATION_FLAG}"
+        echo '# =                      CREATED BY ANTHONYZATION SCRIPT                       =' >> "${ANTHONYZATION_FLAG}"
+        echo '# =                 https://github.com/AnthonyD973/Anthonyize                  =' >> "${ANTHONYZATION_FLAG}"
+        echo '# ==============================================================================' >> "${ANTHONYZATION_FLAG}"
+        echo >> "${ANTHONYZATION_FLAG}"
+        echo 'The presence of this file indicates that the Anthonyzation script' >> "${ANTHONYZATION_FLAG}"
+        echo 'was run on this system.' >> "${ANTHONYZATION_FLAG}"
+    fi
 }
 
 createFlagFile

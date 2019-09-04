@@ -3,7 +3,7 @@
 
 tweakFilesystem() {
     mkdir -p ~/Git
-    mkdir -p ~/Desktop # No matter whether we have a GUI ;
-                       # Desktop is a sort of catch-all directory for whatever
-                       # is only here temporarily
+    mkdir -p ~/Desktop # No matter whether we have a GUI ; I consider
+                       # Desktop to be a sort of catch-all directory for whatever
+                       # I use temporarily
 }

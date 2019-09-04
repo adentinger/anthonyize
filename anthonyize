@@ -9,11 +9,14 @@ source "${SCRIPTS_DIR}/commands"
 source "${SCRIPTS_DIR}/fs"
 
 createFlagFile() {
-    message $'\nCreating anthonyzation flag...\n'
+    message $'\nCreating anthonyzation flag...'
     superUserDo bash -c "source \"${SCRIPTS_DIR}/anthonyize-create-flag-file\""
 }
 
 anthonyize() {
+    if [ ! -z "${UPDATE_ANTHONYZATION}" ]; then
+        message $'Updating anthonyzation...\n'
+    fi
     tweakFilesystem
     installConfigFiles
     setupCli

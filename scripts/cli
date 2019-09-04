@@ -6,7 +6,7 @@ source "${THIS_SCRIPT_DIR}/common"
 
 # Append changes the bash.bashrc file whitout being too intrusive.
 setupBashrc() {
-    message $'\nSetting up bashrc\n'
+    message $'\nSetting up bashrc'
     superUserDo bash -c "source \"${SCRIPTS_DIR}/cli-setup-bashrc\""
 }
 
