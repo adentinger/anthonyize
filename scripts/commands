@@ -19,8 +19,6 @@ configureGit() {
         git confg alias.conf config
         git confg color.ui auto
         git confg push.default simple
-        git confg user.name 'Anthony Dentinger'
-        git confg user.email 'anthony.dentinger@polymtl.ca'
         git confg alias.h 'log --graph --decorate --glob=*'
         git confg alias.c commit
         git confg alias.cam 'commit --amend'
