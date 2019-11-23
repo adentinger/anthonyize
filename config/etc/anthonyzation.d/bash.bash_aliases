@@ -5,6 +5,8 @@
 # =                 https://github.com/AnthonyD973/Anthonyize                  =
 # ==============================================================================
 
+alias please='sudo'
+
 alias cls='clear'
 
 alias cdg='cd "$HOME/Git"'
