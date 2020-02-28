@@ -23,7 +23,7 @@ This is where we call the other scripts, and where we configure the prompt color
 
 To place your favorite aliases.
 
-Autocompletion of aliases works perfectly under Linux systems that have the `bash-completion` (name may vary depending on distro and version) package installed. For systems that don't have it (e.g. Git Bash, sigh), only aliases that consist of a program name (e.g., `alias l='ls -A --color=auto`) have autocomplete. Not that it couldn't be done, though.
+Autocompletion of aliases works perfectly under Linux systems that have the `bash-completion` (name may vary depending on distro and version) package installed. For systems that don't have it (e.g. Git Bash, sigh), only aliases that consist of a program name (e.g., `alias g='git'`) have autocomplete. So `alias l='ls -A --color=auto'` would not. Not that it couldn't be done, though.
 
 ### `scripts/commands`
 
