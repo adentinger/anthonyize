@@ -38,7 +38,9 @@ configureGit() {
         git confg alias.cpc 'cherry-pick --continue'
         git confg alias.cpa 'cherry-pick --abort'
         git confg alias.cps 'cherry-pick --skip'
-        git confg alias.wc 'whatchanged --graph --decorate --glob="*"'
+        # git whatchanged is deprecated, so use git log instead for wc
+        # https://stackoverflow.com/a/18585297/2252948
+        git confg alias.wc 'log --raw --no-merges --graph --decorate --glob="*"'
         git confg alias.f fetch
         git confg alias.d diff
         git confg alias.r reset
