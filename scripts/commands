@@ -19,7 +19,7 @@ configureGit() {
         git confg alias.conf config
         git confg color.ui auto
         git confg push.default simple
-        git confg alias.h 'log --graph --decorate --glob=*'
+        git confg alias.h 'log --graph --decorate'
         git confg alias.c commit
         git confg alias.cam 'commit --amend'
         git confg alias.t tag
@@ -40,7 +40,7 @@ configureGit() {
         git confg alias.cps 'cherry-pick --skip'
         # git whatchanged is deprecated, so use git log instead for wc
         # https://stackoverflow.com/a/18585297/2252948
-        git confg alias.wc 'log --raw --no-merges --graph --decorate --glob="*"'
+        git confg alias.wc 'log --raw --no-merges --graph --decorate'
         git confg alias.f fetch
         git confg alias.d diff
         git confg alias.r reset
