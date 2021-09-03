@@ -9,11 +9,19 @@ source "${SCRIPTS_DIR}/commands"
 source "${SCRIPTS_DIR}/fs"
 
 createFlagFile() {
-    message $'\nCreating anthonyzation flag...'
+    message $'\nCreating anthonyzation flag.'
     superUserDo bash -c "source \"${SCRIPTS_DIR}/anthonyize-create-flag-file\""
 }
 
 anthonyize() {
+    if [ "$(whoami)" == root ]; then
+        messageError $'WARNING: Anthonyization is running as root (did you use sudo?).'
+        messageError $'The configurations will work but some will only apply to the'
+        messageError $'root user, not to the unprivileged user. Note that you may'
+        messageError $'want to do this so that a root shell will have your usual'
+        messageError $'configuration too (when running the Anthonyzation as normal'
+        messageError $'user, some of the configuration only applies to that user).\n'
+    fi
     if [ ! -z "${UPDATE_ANTHONYZATION}" ]; then
         message $'Updating anthonyzation...\n'
     fi
