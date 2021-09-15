@@ -16,6 +16,11 @@ configureGit() {
             git confg core.editor nano
         fi
 
+        local EXCLUDES_FILE="$HOME/.gitexcludes"
+        touch "${EXCLUDES_FILE}"
+        echo '/.vscode/' >> "${EXCLUDES_FILE}"
+
+        git confg core.excludesfile "${EXCLUDES_FILE}"
         git confg alias.conf config
         git confg color.ui auto
         git confg push.default simple
