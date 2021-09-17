@@ -34,6 +34,7 @@ configureGit() {
         git confg alias.s status
         git confg alias.m merge
         git confg alias.ma 'merge --abort'
+        git confg alias.mb 'merge-base'
         git confg alias.reb rebase
         git confg alias.rebc 'rebase --continue'
         git confg alias.reba 'rebase --abort'
