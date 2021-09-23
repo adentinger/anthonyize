@@ -25,6 +25,7 @@ configureGit() {
         git confg color.ui auto
         git confg push.default simple
         git confg alias.h 'log --graph --decorate'
+        git confg alias.bl blame
         git confg alias.c commit
         git confg alias.cam 'commit --amend'
         git confg alias.t tag
