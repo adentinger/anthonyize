@@ -26,8 +26,8 @@ configureGit() {
         fi
 
         local EXCLUDES_FILE="$HOME/.gitexcludes"
-        touch "${EXCLUDES_FILE}"
-        echo '/.vscode/' >> "${EXCLUDES_FILE}"
+        touch "${EXCLUDES_FILE}" || return
+        echo '/.vscode/' >> "${EXCLUDES_FILE}" || return
 
         git confg core.excludesfile "${EXCLUDES_FILE}"
         git confg alias.conf config
@@ -68,9 +68,11 @@ configureGit() {
         git confg alias.subm submodule
         git confg alias.rev revert
         git confg alias.fp format-patch
+    else
+        messageStatus '"git" command not found in PATH. Not configuring Git.'
     fi
 }
 
 configureCommands() {
-    configureGit
+    configureGit || return
 }

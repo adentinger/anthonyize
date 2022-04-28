@@ -13,5 +13,11 @@ setupBashrc() {
 
 # Sets up bash
 setupCli() {
-    setupBashrc
+    if ! haveFlagFile; then
+        message 'Setting up bash.'
+        setupBashrc || return
+    else
+        messageStatus 'Anthonyzation already run; not setting up bash.'
+        return 0
+    fi
 }

@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 source "${THIS_SCRIPT_DIR}/scripts/common"
@@ -22,14 +22,18 @@ anthonyize() {
         messageError $'configuration too (when running the Anthonyzation as normal'
         messageError $'user, some of the configuration only applies to that user).\n'
     fi
-    if [ ! -z "${UPDATE_ANTHONYZATION}" ]; then
-        message $'Updating anthonyzation...\n'
+
+    message 'Checking for flag file.'
+    if haveFlagFile; then
+        messageStatus $'Already present; updating anthonyzation.\n'
+    else
+        messageStatus $'Not present; setting up anthonyzation.\n'
     fi
-    tweakFilesystem
-    installConfigFiles
-    setupCli
-    configureCommands
-    createFlagFile
+    tweakFilesystem || return
+    installConfigFiles || return
+    setupCli || return
+    configureCommands || return
+    createFlagFile || return
 }
 
-anthonyize
+anthonyize || messageError $'An error occurred. Stop anthonyzation.\n'

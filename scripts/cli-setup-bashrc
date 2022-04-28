@@ -10,7 +10,7 @@ setupBashrc() {
     for bashrc in "${BASHRC_PLACES[@]}"; do
         if [ -f "${bashrc}" ]; then
             local BASHRC_FILE="${bashrc}"
-            echo "Assuming bashrc file is ${bashrc}"
+            messageStatus "Assuming bashrc file is ${bashrc}"
             break
         fi
     done
@@ -20,18 +20,12 @@ setupBashrc() {
         exit 1
     fi
 
-    if haveFlagFile; then
-        message 'Anthonyzation already run; not updating bashrc'
-        exit 0
-    fi
-
     echo >> "${BASHRC_FILE}" # In case there was no empty line beforehand
     echo '# ==============================================================================' >> "${BASHRC_FILE}"
     echo '# =                        ADDED BY ANTHONYZATION SCRIPT                       =' >> "${BASHRC_FILE}"
     echo '# =                 https://github.com/AnthonyD973/Anthonyize                  =' >> "${BASHRC_FILE}"
     echo '# ==============================================================================' >> "${BASHRC_FILE}"
-    echo '# Date: '"$(date --utc)" >> "${BASHRC_FILE}"
-    echo 'source /etc/anthonyzation.d/bash_alias_completion # Setup aliases' >> "${BASHRC_FILE}"
+    echo 'source /etc/anthonyzation.d/bash_anthonyzation' >> "${BASHRC_FILE}"
 }
 
 setupBashrc
