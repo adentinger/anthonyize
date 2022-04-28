@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash -e
+
 # Create filesystem directories
 
 tweakFilesystem() {

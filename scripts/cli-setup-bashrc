@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash -e
+
 # Script which is meant to be executed as sudo.
 
 THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"

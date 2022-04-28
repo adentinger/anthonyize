@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash -e
 
 # Script sourced by all other scripts. Used e.g. to
 # set variables common to all scripts.
