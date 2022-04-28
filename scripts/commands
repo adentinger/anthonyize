@@ -17,6 +17,14 @@ configureGit() {
             git confg core.editor nano
         fi
 
+        if command -v less >/dev/null; then
+            # Tabs stops are set one column from the left of the console,
+            # then every 4 columns. Good for 'git diff', where the first
+            # character is only to tell whether the line was deleted added,
+            # or unchanged.
+            git confg core.pager 'less -x1,5' || return
+        fi
+
         local EXCLUDES_FILE="$HOME/.gitexcludes"
         touch "${EXCLUDES_FILE}"
         echo '/.vscode/' >> "${EXCLUDES_FILE}"
