@@ -14,6 +14,7 @@ createFlagFile() {
         echo '# =                      CREATED BY ANTHONYZATION SCRIPT                       =' >> "${ANTHONYZATION_FLAG}"
         echo '# =                 https://github.com/AnthonyD973/Anthonyize                  =' >> "${ANTHONYZATION_FLAG}"
         echo '# ==============================================================================' >> "${ANTHONYZATION_FLAG}"
+        echo '# Date: '"$(date --utc)" >> "${BASHRC_FILE}"
         echo >> "${ANTHONYZATION_FLAG}"
         echo 'The presence of this file indicates that the Anthonyzation script' >> "${ANTHONYZATION_FLAG}"
         echo 'was run on this system.' >> "${ANTHONYZATION_FLAG}"

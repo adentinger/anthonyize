@@ -110,13 +110,8 @@ superUserDo() {
     fi
 }
 
-checkFlagFileExistance() {
-    if [ -f "${ANTHONYZATION_FLAG}" ]; then
-        UPDATE_ANTHONYZATION="y"
-    else
-        unset UPDATE_ANTHONYZATION
-    fi
+haveFlagFile() {
+    [ -f "${ANTHONYZATION_FLAG}" ]
 }
 
 setSystemInfo
-checkFlagFileExistance

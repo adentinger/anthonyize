@@ -1,0 +1,7 @@
+#!/bin/bash
+
+source /etc/anthonyzation.d/bash.bash_aliases  # Setup aliases
+source /etc/bash_completion.d/alias_completion # Setup alias completion
+
+# Makes the prompt look like an Ubuntu prompt
+export PS1=$'\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '

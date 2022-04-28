@@ -3,8 +3,8 @@
 # Create filesystem directories
 
 tweakFilesystem() {
-    mkdir -p ~/Git
-    mkdir -p ~/Desktop # No matter whether we have a GUI ; I consider
-                       # Desktop to be a sort of catch-all directory for whatever
-                       # I use temporarily
+    mkdir -p "$HOME/Git"
+    # No matter whether there is a GUI, I consider Desktop to be a sort of
+    # catch-all directory for whatever I use temporarily.
+    mkdir -p "$HOME/Desktop"
 }
