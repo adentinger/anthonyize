@@ -30,6 +30,8 @@ configureGit() {
         echo '/.vscode/' >> "${EXCLUDES_FILE}" || return
         echo '# Emacs temporary files' >> "${EXCLUDES_FILE}" || return
         echo '*~' >> "${EXCLUDES_FILE}" || return
+        echo '.#*' >> "${EXCLUDES_FILE}" || return
+        echo '\#*#' >> "${EXCLUDES_FILE}" || return
 
         git confg core.excludesfile "${EXCLUDES_FILE}"
         git confg alias.conf config
