@@ -9,10 +9,8 @@ configureGit() {
     if command -v git >/dev/null; then
         git config --global alias.confg 'config --global'
 
-        if command -v xemacs >/dev/null; then
-            git confg core.editor 'xemacs -nw'
-        elif command -v emacs >/dev/null; then
-            git confg core.editor 'emacs -nw'
+        if command -v emacs >/dev/null; then
+            git confg core.editor 'emacs'
         elif command -v nano >/dev/null; then
             git confg core.editor nano
         fi
