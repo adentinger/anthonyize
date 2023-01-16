@@ -30,6 +30,9 @@ configureGit() {
         echo '*~' >> "${EXCLUDES_FILE}" || return
         echo '.#*' >> "${EXCLUDES_FILE}" || return
         echo '\#*#' >> "${EXCLUDES_FILE}" || return
+        echo '# CMake Presets for user --not meant to be in repos:' >> "${EXCLUDES_FILE}" || return
+        echo '# https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html#introduction' >> "${EXCLUDES_FILE}" || return
+        echo 'CMakeUserPresets.json' >> "${EXCLUDES_FILE}" || return
 
         git confg core.excludesfile "${EXCLUDES_FILE}"
         git confg alias.conf config
