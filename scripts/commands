@@ -71,6 +71,8 @@ configureGit() {
         git confg alias.b branch
         git confg alias.bis bisect
         git confg alias.subm submodule
+        git confg alias.submu 'submodule update'
+        git confg alias.submuir 'submodule update --init --recursive'
         git confg alias.rev revert
         git confg alias.fp format-patch
     else
