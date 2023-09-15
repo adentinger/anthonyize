@@ -25,7 +25,14 @@ configureGit() {
 
         local EXCLUDES_FILE="$HOME/.gitexcludes"
         touch "${EXCLUDES_FILE}" || return
-        echo '/.vscode/' >> "${EXCLUDES_FILE}" || return
+        echo >> "${EXCLUDES_FILE}" || return
+        echo '###########################################' >> "${EXCLUDES_FILE}" || return
+        echo '# Written by Anthonyzation script' >> "${EXCLUDES_FILE}" || return
+        echo '# https://github.com/anthonyd973/anthonyize' >> "${EXCLUDES_FILE}" || return
+        echo '# VSCode config dir. Often useful on Git, but often not.' >> "${EXCLUDES_FILE}" || return
+        echo '.vscode/' >> "${EXCLUDES_FILE}" || return
+        echo '# Nano backup files' >> "${EXCLUDES_FILE}" || return
+        echo '*.bak' >> "${EXCLUDES_FILE}" || return
         echo '# Emacs temporary files' >> "${EXCLUDES_FILE}" || return
         echo '*~' >> "${EXCLUDES_FILE}" || return
         echo '.#*' >> "${EXCLUDES_FILE}" || return
@@ -33,6 +40,7 @@ configureGit() {
         echo '# CMake Presets for user --not meant to be in repos:' >> "${EXCLUDES_FILE}" || return
         echo '# https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html#introduction' >> "${EXCLUDES_FILE}" || return
         echo 'CMakeUserPresets.json' >> "${EXCLUDES_FILE}" || return
+        echo '###########################################' >> "${EXCLUDES_FILE}" || return
 
         git confg core.excludesfile "${EXCLUDES_FILE}"
         git confg alias.conf config
