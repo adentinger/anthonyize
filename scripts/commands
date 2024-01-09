@@ -104,7 +104,7 @@ add_ssh_fingerprint() {
 
 configureSsh() {
     # Check if open-ssh seems to be installed, otherwise skip installation
-    if ! command -v add_ssh_fingerprint; then
+    if ! command -v add_ssh_fingerprint >/dev/null; then
         messageStatus 'Not configuring OpenSSH: doesn'"'"'t seem to be installed.'
         true
         return
