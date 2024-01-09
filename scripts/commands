@@ -110,6 +110,7 @@ configureSsh() {
         return
     fi
 
+    mkdir -p "$HOME/.ssh"
     # Add SSH fingerprints to ~/.ssh/known_hosts
 
     # GitHub
