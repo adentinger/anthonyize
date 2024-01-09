@@ -103,6 +103,13 @@ add_ssh_fingerprint() {
 }
 
 configureSsh() {
+    # Check if open-ssh seems to be installed, otherwise skip installation
+    if ! command -v add_ssh_fingerprint; then
+        messageStatus 'Not configuring OpenSSH: doesn'"'"'t seem to be installed.'
+        true
+        return
+    fi
+
     # Add SSH fingerprints to ~/.ssh/known_hosts
 
     # GitHub
