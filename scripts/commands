@@ -69,6 +69,7 @@ configureGit() {
         # https://stackoverflow.com/a/18585297/2252948
         git confg alias.wc 'log --raw --no-merges --graph --decorate'
         git confg alias.f fetch
+        git confg alias.fap 'fetch --all --prune'
         git confg alias.d diff
         git confg alias.r reset
         git confg alias.st stash
