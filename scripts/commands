@@ -18,7 +18,12 @@ configureGit() {
             # then every 4 columns. Good for 'git diff', where the first
             # character is only to tell whether the line was deleted added,
             # or unchanged.
-            git confg core.pager 'less -x1,5' || return
+            #
+            # '-+F' makes sure to always page, even if there is one screen
+            # (I have a tendency to hit 'q' immediately after running
+            # 'git log', which types a literal 'q' on the command-line when
+            # 'git log' shows less than one page.)
+            git confg core.pager 'less -x1,5 -+F' || return
         fi
 
         local EXCLUDES_FILE="$HOME/.gitexcludes"
