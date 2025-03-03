@@ -44,15 +44,26 @@ configureGit() {
         echo '# https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html#introduction' >> "${EXCLUDES_FILE}" || return
         echo 'CMakeUserPresets.json' >> "${EXCLUDES_FILE}" || return
         echo '###########################################' >> "${EXCLUDES_FILE}" || return
-
         git confg core.excludesfile "${EXCLUDES_FILE}"
-        git confg alias.conf config
+
+        # Regularly performs Git cleanup stuff using e.g. a systemd unit:
+        # https://blog.gitbutler.com/git-tips-2-new-stuff-in-git/#git-maintenance
+        # This requires Git 2.29, so ignore it if it fails.
+        git maintenance start || true
+
+        git confg branch.sort -committerdate
         git confg color.ui auto
+        git confg column.ui auto
         git confg push.default simple
+        # Writes a commit graph so that 'git log --graph' is much faster
+        git confg fetch.writeCommitGraph true
+
+        # Aliases
         git confg alias.h 'log --graph --decorate'
         git confg alias.bl blame
         git confg alias.c commit
         git confg alias.cam 'commit --amend'
+        git confg alias.conf config
         git confg alias.t tag
         git confg alias.p pull
         git confg alias.a 'add -A'
@@ -78,6 +89,7 @@ configureGit() {
         git confg alias.d diff
         git confg alias.r reset
         git confg alias.st stash
+        git confg alias.sta 'stash --all'
         git confg alias.ch checkout
         git confg alias.cl clone
         git confg alias.b branch
