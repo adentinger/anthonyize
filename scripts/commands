@@ -87,6 +87,7 @@ configureGit() {
         git confg alias.rebc 'rebase --continue'
         git confg alias.reba 'rebase --abort'
         git confg alias.rebs 'rebase --skip'
+        git confg alias.res 'restore'
         git confg alias.rev revert
         git confg alias.rp rev-parse
         git confg alias.s status
@@ -95,6 +96,7 @@ configureGit() {
         git confg alias.subm submodule
         git confg alias.submu 'submodule update'
         git confg alias.submuir 'submodule update --init --recursive'
+        git confg alias.sw 'switch'
         git confg alias.t tag
         # git whatchanged is deprecated, so use git log instead for wc
         # https://stackoverflow.com/a/18585297/2252948
