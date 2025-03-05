@@ -55,7 +55,8 @@ configureGit() {
         git confg color.ui auto
         git confg column.ui auto
         git confg push.default simple
-        # Writes a commit graph so that 'git log --graph' is much faster
+        # Makes 'fetch' write a commit graph so that 'git log --graph' is much
+        # faster on big repos
         git confg fetch.writeCommitGraph true
 
         # Aliases
