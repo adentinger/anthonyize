@@ -146,7 +146,35 @@ configureSsh() {
     add_ssh_fingerprint 'gitlab.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFSMqzJeV9rUzU4kWitGjeR4PWSa29SPqJ1fVkhtj3Hw9xjLVXVYrU9QlYWrOLXBpQ6KWjbjTDTdDkoohFzgbEY='
 }
 
+configureGitSignKey() {
+    local PRIVATE_GIT_SIGN_KEY="$HOME/.anthonyize/id_ed25519_git_sign_key"
+    local PUBLIC_GIT_SIGN_KEY="$PRIVATE_GIT_SIGN_KEY.pub"
+    if ! [ -f "${PUBLIC_GIT_SIGN_KEY}" ]; then
+        # Using an SSH signing key requires Git 2.34 or later (which came out in
+        # Nov 2021).
+        if command -v ssh-keygen >/dev/null; then
+            mkdir -p "$(dirname "${PUBLIC_GIT_SIGN_KEY}")"
+            # No -N so this will prompt for a passphrase
+            message "Generating SSH key for signing Git commits (${PUBLIC_GIT_SIGN_KEY}). This should prompt for an optional passphrase."
+            # ed25519 is the recommended algorithm according to ssh.com.
+            # It came out in OpenSSH 6.5 (Jan 2014).
+            # https://www.ssh.com/academy/ssh/keygen#choosing-an-algorithm-and-key-size
+            ssh-keygen -t ed25519 -f "${PRIVATE_GIT_SIGN_KEY}"
+            git config --global user.signingkey "${PUBLIC_GIT_SIGN_KEY}"
+            git config --global gpg.format ssh
+            git config --global commit.gpgsign true
+            messageStatus "Git signing key generated (${PUBLIC_GIT_SIGN_KEY}.pub)."
+            messageStatus "You may add the public key to your GitHub/GitLab account:"
+            messageStatus "On GitHub: https://github.com/settings/keys"
+            messageStatus "On GitLab: https://gitlab.com/-/user_settings/ssh_keys"
+        fi
+    else
+        messageStatus "Git signing key already exists: ${PUBLIC_GIT_SIGN_KEY}"
+    fi
+}
+
 configureCommands() {
     configureGit || return
     configureSsh || return
+    configureGitSignKey || return
 }
