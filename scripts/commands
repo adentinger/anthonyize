@@ -163,7 +163,7 @@ configureGitSignKey() {
             git config --global user.signingkey "${PUBLIC_GIT_SIGN_KEY}"
             git config --global gpg.format ssh
             git config --global commit.gpgsign true
-            messageStatus "Git signing key generated (${PUBLIC_GIT_SIGN_KEY}.pub)."
+            messageStatus "Git signing key generated (${PUBLIC_GIT_SIGN_KEY})."
             messageStatus "You may add the public key to your GitHub/GitLab account:"
             messageStatus "On GitHub: https://github.com/settings/keys"
             messageStatus "On GitLab: https://gitlab.com/-/user_settings/ssh_keys"
