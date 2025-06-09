@@ -151,10 +151,11 @@ configureSsh() {
 configureGitSignKey() {
     local PRIVATE_GIT_SIGN_KEY="$HOME/.anthonyize/id_ed25519_git_sign_key"
     local PUBLIC_GIT_SIGN_KEY="$PRIVATE_GIT_SIGN_KEY.pub"
+    # Don't override existing key if it exists
     if ! [ -f "${PUBLIC_GIT_SIGN_KEY}" ]; then
         # Using an SSH signing key requires Git 2.34 or later (which came out in
         # Nov 2021).
-        if command -v ssh-keygen >/dev/null; then
+        if command -v ssh-keygen >/dev/null && command -v git >/dev/null; then
             mkdir -p "$(dirname "${PUBLIC_GIT_SIGN_KEY}")"
             # No -N so this will prompt for a passphrase
             message "Generating SSH key for signing Git commits (${PUBLIC_GIT_SIGN_KEY}). This should prompt for an optional passphrase."
@@ -169,6 +170,8 @@ configureGitSignKey() {
             messageStatus "You may add the public key to your GitHub/GitLab account:"
             messageStatus "On GitHub: https://github.com/settings/keys"
             messageStatus "On GitLab: https://gitlab.com/-/user_settings/ssh_keys"
+        else
+            messageStatus "Skip generating Git signing key: 'ssh-keygen' or 'git' command not found in PATH."
         fi
     else
         messageStatus "Git signing key already exists: ${PUBLIC_GIT_SIGN_KEY}"
