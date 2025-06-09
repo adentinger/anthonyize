@@ -77,6 +77,8 @@ configureGit() {
         git confg alias.d diff
         git confg alias.f fetch
         git confg alias.fap 'fetch --all --prune'
+        # Update local tags
+        git confg alias fat 'fetch --all --tags'
         git confg alias.fp format-patch
         git confg alias.h 'log --graph --decorate'
         git confg alias.m merge
