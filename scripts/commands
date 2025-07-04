@@ -70,7 +70,8 @@ configureGit() {
         git confg alias.ch checkout
         git confg alias.cl clone
         git confg alias.conf config
-        git confg alias.cp cherry-pick
+        # "-x" adds "(cherry picked from commit ...)" to help traceability
+        git confg alias.cp 'cherry-pick -x'
         git confg alias.cpc 'cherry-pick --continue'
         git confg alias.cpa 'cherry-pick --abort'
         git confg alias.cps 'cherry-pick --skip'
