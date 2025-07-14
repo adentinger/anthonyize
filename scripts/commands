@@ -80,6 +80,17 @@ configureGit() {
         # Shallow clone: Lazily download git history, trees and blobs. Useful
         # for CI builds.
         git confg alias.clsh 'clone --depth=1'
+        # Same commands, but also clone submodules
+        git confg alias.clr 'clone --recurse-submodules'
+        git confg alias.clrbl 'clone --recurse-submodules --filter=blob:none --also-filter-submodules'
+        # According to Gemini, for treeless clones specifically:
+        #
+        # "The overhead of fetching trees on demand for every submodule
+        # (especially during CI/CD) operation might quickly outweigh the
+        # initial clone speed benefit."
+        git confg alias.clrtl 'clone --recurse-submodules --filter=tree:0 --also-filter-submodules'
+        git confg alias.clrsh 'clone --recurse-submodules --depth=1 --shallow-submodules'
+
         git confg alias.conf config
         # "-x" adds "(cherry picked from commit ...)" to help traceability
         git confg alias.cp 'cherry-pick -x'
