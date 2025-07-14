@@ -68,7 +68,18 @@ configureGit() {
         git confg alias.c commit
         git confg alias.cam 'commit --amend'
         git confg alias.ch checkout
+        # Default clone: Eagerly download git history, trees (directory
+        # structure) and blobs (file deltas).
         git confg alias.cl clone
+        # Blobless clone: Eagerly download git history and trees, but lazily
+        # download blobs.
+        git confg alias.clbl 'clone --filter=blob:none'
+        # Treeless clone: Eagerly download git history, but lazily download
+        # trees and blobs.
+        git confg alias.cltl 'clone --filter=tree:0'
+        # Shallow clone: Lazily download git history, trees and blobs. Useful
+        # for CI builds.
+        git confg alias.clsh 'clone --depth=1'
         git confg alias.conf config
         # "-x" adds "(cherry picked from commit ...)" to help traceability
         git confg alias.cp 'cherry-pick -x'
