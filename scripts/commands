@@ -192,7 +192,7 @@ configureGitSignKey() {
             git config --global tag.gpgSign true
             git config --global push.gpgSign "if-asked"
             messageStatus "Git signing key generated (${PUBLIC_GIT_SIGN_KEY})."
-            messageStatus "You may add the public key to your GitHub/GitLab account:"
+            messageStatus "You may add this public key to your GitHub/GitLab account:"
             messageStatus "On GitHub: https://github.com/settings/keys"
             messageStatus "On GitLab: https://gitlab.com/-/user_settings/ssh_keys"
         else
@@ -200,6 +200,9 @@ configureGitSignKey() {
         fi
     else
         messageStatus "Git signing key already exists: ${PUBLIC_GIT_SIGN_KEY}"
+        messageStatus "As a reminder, you may add this public key to your GitHub/GitLab account:"
+        messageStatus "On GitHub: https://github.com/settings/keys"
+        messageStatus "On GitLab: https://gitlab.com/-/user_settings/ssh_keys"
     fi
 }
 
