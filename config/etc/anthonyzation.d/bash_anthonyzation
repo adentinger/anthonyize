@@ -42,7 +42,10 @@ setSystemInfo() {
 
 setSystemInfo
 source /etc/anthonyzation.d/bash.bash_aliases  # Setup aliases
-source /etc/bash_completion.d/alias_completion # Setup alias completion
+if [ "$BASH_ANTHONYZATION_OS" != Darwin ]; then
+    # Setup alias completion
+    source /etc/bash_completion.d/alias_completion
+fi
 
 # Set tab stops to each column multiple of 4.
 tabs 4
