@@ -1,5 +1,45 @@
 #!/bin/bash
 
+setSystemInfo() {
+    checkParamNum 0 $# || exit 1
+
+    # BASED ON https://unix.stackexchange.com/questions/6345/how-can-i-get-distribution-name-and-version-number-in-a-simple-shell-script
+    if [ -f /etc/os-release ]; then
+        # freedesktop.org and systemd
+        . /etc/os-release
+        BASH_ANTHONYZATION_OS=GNU/Linux
+        BASH_ANTHONYZATION_DISTRO="${NAME}"
+        BASH_ANTHONYZATION_VER="${VERSION_ID}"
+    elif type lsb_release >/dev/null 2>&1; then
+        # linuxbase.org
+        BASH_ANTHONYZATION_OS=GNU/Linux
+        BASH_ANTHONYZATION_DISTRO="$(lsb_release -si)"
+        BASH_ANTHONYZATION_VER="$(lsb_release -sr)"
+    elif [ -f /etc/lsb-release ]; then
+        # For some versions of Debian/Ubuntu without lsb_release command
+        . /etc/lsb-release
+        BASH_ANTHONYZATION_OS=GNU/Linux
+        BASH_ANTHONYZATION_DISTRO=$DISTRIB_ID
+        BASH_ANTHONYZATION_VER="${DISTRIB_RELEASE}"
+    elif [ -f /etc/debian_version ]; then
+        # Older Debian/Ubuntu/etc.
+        BASH_ANTHONYZATION_OS=GNU/Linux
+        BASH_ANTHONYZATION_DISTRO=Debian
+        BASH_ANTHONYZATION_VER="$(cat /etc/debian_version)"
+    elif [ -f /etc/SuSe-release ] || [ -f /etc/redhat-release ]; then
+        # Older Red Hat, CentOS, etc.
+        BASH_ANTHONYZATION_OS=GNU/Linux
+        BASH_ANTHONYZATION_DISTRO="$(grep -oP '^\w+' /etc/redhat-release)"
+        BASH_ANTHONYZATION_VER="$(grep -oP '\d+(\.\d+)*' /etc/redhat-release)"
+    else
+        # Fall back to uname, e.g. "Linux <version>",
+        # also works for BSD, Cygwin, MINGW, Darwin, etc.
+        BASH_ANTHONYZATION_OS="$(uname -o)"
+        BASH_ANTHONYZATION_DISTRO="$(uname -s)"
+        BASH_ANTHONYZATION_VER="$(uname -r)"
+    fi
+}
+
 source /etc/anthonyzation.d/bash.bash_aliases  # Setup aliases
 source /etc/bash_completion.d/alias_completion # Setup alias completion
 
