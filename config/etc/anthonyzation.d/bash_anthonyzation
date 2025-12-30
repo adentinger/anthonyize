@@ -1,8 +1,6 @@
 #!/bin/bash
 
 setSystemInfo() {
-    checkParamNum 0 $# || exit 1
-
     # BASED ON https://unix.stackexchange.com/questions/6345/how-can-i-get-distribution-name-and-version-number-in-a-simple-shell-script
     if [ -f /etc/os-release ]; then
         # freedesktop.org and systemd
