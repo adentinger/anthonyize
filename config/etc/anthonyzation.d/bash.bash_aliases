@@ -14,7 +14,11 @@ alias cdd='cd "$HOME/Desktop"'
 alias cd..='cd ..'
 
 alias g='git'
-alias nano='nano -LwxET 4'
+if [ "$BASH_ANTHONYZATION_OS" != Darwin ]; then
+	alias nano='nano -LwxET 4'
+else
+	alias nano='nano -wx'
+fi
 alias e='emacs -nw'
 
 alias grep='grep --color=auto'
