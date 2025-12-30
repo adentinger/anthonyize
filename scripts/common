@@ -102,7 +102,7 @@ setSystemInfo() {
         VER="$(grep -oP '\d+(\.\d+)*' /etc/redhat-release)"
     else
         # Fall back to uname, e.g. "Linux <version>",
-        # also works for BSD, Cygwin, MINGW, etc.
+        # also works for BSD, Cygwin, MINGW, Darwin, etc.
         OS="$(uname -o)"
         DISTRO="$(uname -s)"
         VER="$(uname -r)"
@@ -112,7 +112,7 @@ setSystemInfo() {
 # EXPECTED PARAMS:
 # any amount
 superUserDo() {
-    if [ "${OS}" == GNU/Linux ]; then
+    if [ "${OS}" == GNU/Linux ] || [ "${OS}" == Darwin ]; then
         # Linux machine
         if [ "$(whoami)" != root ]; then
             sudo "$@"
