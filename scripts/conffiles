@@ -10,7 +10,7 @@ installConfigFiles() {
 
     # Copy files over from the directory containing the
     # configuration files to /.
-    superUserDo cp -ruv "${CONFIG_DIR}/"* /
+    superUserDo cp -ruv "${CONFIG_DIR}/etc/"* /etc
 
     # In the copied files, replace some parts of text depending on the current system.
     if [ "${OS}" == GNU/Linux ]; then
