@@ -114,6 +114,7 @@ configureGit() {
         git confg alias.rebc 'rebase --continue'
         git confg alias.reba 'rebase --abort'
         git confg alias.rebs 'rebase --skip'
+        git confg alias.rem remote
         git confg alias.rest 'restore'
         git confg alias.rev revert
         git confg alias.rp rev-parse
