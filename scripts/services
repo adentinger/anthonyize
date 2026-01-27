@@ -1,9 +1,19 @@
 #!/bin/bash -e
 
-sshAgent() {
-    message 'Setting up ssh-agent.'
+startServices() {
+    if [ "${OS}" == GNU/Linux ] || [ "${OS}" == Darwin ]; then
+        # TODO if the ssh-agent isn't running, start it
+        :
+    else
+        if command -v powershell >/dev/null 2>&1; then
+            message 'Enabling & starting services.'
+            # Assume we are on Windows; enable then start ssh-agent service.
+            powershell -ExecutionPolicy Bypass -File \
+                "$(cygpath -w "$SCRIPTS_DIR/services-setup-runas.ps1")"
+        fi
+    fi
 }
 
 setupServices() {
-    sshAgent
+    startServices
 }
