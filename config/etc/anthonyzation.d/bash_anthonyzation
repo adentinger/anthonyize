@@ -45,6 +45,13 @@ if [ "$BASH_ANTHONYZATION_OS" != Darwin ]; then
     source /etc/bash_completion.d/alias_completion
 fi
 
+if [ "$BASH_ANTHONYZATION_OS" != GNU/Linux ] && [ "$BASH_ANTHONYZATION_OS" != Darwin ]; then
+    # Assume we are on Windows. Add Windows' OpenSSH to PATH.
+    # This is so that we can ssh-add keys to the ssh-agent
+    # and use these keys in any console.
+    export PATH="/c/Windows/System32/OpenSSH:$PATH"
+fi
+
 # Set tab stops to each column multiple of 4.
 tabs 4
 
