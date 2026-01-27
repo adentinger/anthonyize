@@ -7,6 +7,7 @@ source "${SCRIPTS_DIR}/conffiles"
 source "${SCRIPTS_DIR}/cli"
 source "${SCRIPTS_DIR}/commands"
 source "${SCRIPTS_DIR}/fs"
+source "${SCRIPTS_DIR}/services"
 
 createFlagFile() {
     message $'\nCreating anthonyzation flag.'
@@ -33,6 +34,7 @@ anthonyize() {
     installConfigFiles || return
     setupCli || return
     configureCommands || return
+    setupServices || return
     createFlagFile || return
 }
 

@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+sshAgent() {
+    message 'Setting up ssh-agent.'
+}
+
+setupServices() {
+    sshAgent
+}
