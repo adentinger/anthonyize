@@ -113,7 +113,7 @@ setSystemInfo() {
 # any amount
 superUserDo() {
     if [ "${OS}" == GNU/Linux ] || [ "${OS}" == Darwin ]; then
-        # Linux machine
+        # Linux/Mac machine
         if [ "$(whoami)" != root ]; then
             sudo "$@"
         else
