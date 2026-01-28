@@ -21,11 +21,15 @@ installConfigFiles() {
     fi
 
     while read -r file; do
-        local fileRelative="$(realpath -s --relative-to="${CONFIG_DIR}" "${file}")"
-        local fileDestination="/${fileRelative}"
+        # Unfortunately 'realpath --relative-to' is not POSIX and therefore not
+        # available on MacOS by default, so we assume a single level by using
+        # 'basename'.
+        local fileRelative="$(basename "${file}")"
+        local fileDestination="/etc/anthonyzation.d/${fileRelative}"
+        superUserDo mkdir -p "$(dirname "${fileDestination}")"
         sed \
             -e 's~__COMPLETION_FUNCTION_BODY__~'"${__COMPLETION_FUNCTION_BODY__}"'~g' \
             "${file}" \
             | superUserDo tee "${fileDestination}" >/dev/null
-    done < <(find "${CONFIG_DIR}" -type f)
+    done < <(find "${CONFIG_DIR}/etc/anthonyzation.d" -type f)
 }
