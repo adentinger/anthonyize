@@ -14,15 +14,24 @@ createFlagFile() {
     superUserDo bash -c "source \"${SCRIPTS_DIR}/anthonyize-create-flag-file\""
 }
 
+checkWeAreRunningBash() {
+    if [ -z "$BASH_VERSION" ]; then
+        messageError $'ERROR: anthonyize must be run using bash, not sh or another shell.\n'
+        exit 1
+    fi
+}
+
 anthonyize() {
     if [ "$(whoami)" == root ]; then
-        messageError $'WARNING: Anthonyization is running as root (did you use sudo?).'
+        messageError $'WARNING: Anthonyzation is running as root (did you use sudo?).'
         messageError $'The configurations will work but some will only apply to the'
         messageError $'root user, not to the unprivileged user. Note that you may'
         messageError $'want to do this so that a root shell will have your usual'
         messageError $'configuration too (when running the Anthonyzation as normal'
         messageError $'user, some of the configuration only applies to that user).\n'
     fi
+
+    checkWeAreRunningBash
 
     message 'Checking for flag file.'
     if haveFlagFile; then
