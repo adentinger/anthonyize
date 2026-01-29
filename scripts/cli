@@ -11,8 +11,16 @@ setupBashrc() {
     superUserDo bash -c "source \"${SCRIPTS_DIR}/cli-setup-bashrc\""
 }
 
+setDefaultShellToBash() {
+    if [ "$SHELL" != "/bin/bash" ]; then
+        messageStatus 'Setting default shell to bash.'
+        chsh -s /bin/bash
+    fi
+}
+
 # Sets up bash
 setupCli() {
+    setDefaultShellToBash || return
     if ! haveFlagFile; then
         message 'Setting up bash.'
         setupBashrc || return

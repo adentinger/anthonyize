@@ -31,7 +31,7 @@ anthonyize() {
         messageError $'user, some of the configuration only applies to that user).\n'
     fi
 
-    checkWeAreRunningBash
+    checkWeAreRunningBash || return
 
     message 'Checking for flag file.'
     if haveFlagFile; then
