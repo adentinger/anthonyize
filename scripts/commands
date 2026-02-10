@@ -58,7 +58,8 @@ configureGit() {
             # Assume we are on Windows
             # This is so that we can ssh-add keys to the ssh-agent
             # and use these keys in any console.
-            git config --global core.sshCommand "C:/Windows/System32/OpenSSH/ssh.exe"
+            git confg core.sshCommand "C:/Windows/System32/OpenSSH/ssh.exe"
+            git confg gpg.ssh.program "C:/Windows/System32/OpenSSH/ssh-keygen.exe"
         fi
         # Makes 'fetch' write a commit graph so that 'git log --graph' is much
         # faster on big repos
