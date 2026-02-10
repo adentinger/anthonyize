@@ -12,7 +12,8 @@ setupBashrc() {
 }
 
 setDefaultShellToBash() {
-    if [ "$SHELL" != "/bin/bash" ]; then
+    # Don't use chsh if it isn't available, e.g. on Git Bash.
+    if [ "$SHELL" != "/bin/bash" ] && command -v chsh >/dev/null; then
         messageStatus 'Setting default shell to bash.'
         chsh -s /bin/bash
     fi
