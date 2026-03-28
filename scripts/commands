@@ -9,23 +9,6 @@ configureGit() {
     if command -v git >/dev/null; then
         git config --global alias.confg 'config --global'
 
-        if command -v nano >/dev/null; then
-            git confg core.editor nano
-        fi
-
-        if command -v less >/dev/null; then
-            # Tabs stops are set one column from the left of the console,
-            # then every 4 columns. Good for 'git diff', where the first
-            # character is only to tell whether the line was deleted added,
-            # or unchanged.
-            #
-            # '-+F' makes sure to always page, even if there is one screen
-            # (I have a tendency to hit 'q' immediately after running
-            # 'git log', which types a literal 'q' on the command-line when
-            # 'git log' shows less than one page.)
-            git confg core.pager 'less -x1,5 -+F' || return
-        fi
-
         local EXCLUDES_FILE="$HOME/.gitexcludes"
         touch "${EXCLUDES_FILE}" || return
         echo >> "${EXCLUDES_FILE}" || return
@@ -54,6 +37,23 @@ configureGit() {
         git confg branch.sort -committerdate
         git confg color.ui auto
         git confg column.ui auto
+        if command -v nano >/dev/null; then
+            git confg core.editor nano
+        fi
+
+        if command -v less >/dev/null; then
+            # Tabs stops are set one column from the left of the console,
+            # then every 4 columns. Good for 'git diff', where the first
+            # character is only to tell whether the line was deleted added,
+            # or unchanged.
+            #
+            # '-+F' makes sure to always page, even if there is one screen
+            # (I have a tendency to hit 'q' immediately after running
+            # 'git log', which types a literal 'q' on the command-line when
+            # 'git log' shows less than one page.)
+            git confg core.pager 'less -x1,5 -+F' || return
+        fi
+
         if [ "$OS" != GNU/Linux ] && [ "$OS" != Darwin ]; then
             # Assume we are on Windows
             # This is so that we can ssh-add keys to the ssh-agent
