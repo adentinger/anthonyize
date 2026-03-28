@@ -27,8 +27,8 @@ setSystemInfo() {
     elif [ -f /etc/SuSe-release ] || [ -f /etc/redhat-release ]; then
         # Older Red Hat, CentOS, etc.
         BASH_ANTHONYZATION_OS=GNU/Linux
-        BASH_ANTHONYZATION_DISTRO="$(grep -oP '^\w+' /etc/redhat-release)"
-        BASH_ANTHONYZATION_VER="$(grep -oP '\d+(\.\d+)*' /etc/redhat-release)"
+        BASH_ANTHONYZATION_DISTRO="$(grep -oE '^[a-zA-Z0-9_]+' /etc/redhat-release)"
+        BASH_ANTHONYZATION_VER="$(grep -oE '[0-9]+(\.[0-9]+)*' /etc/redhat-release)"
     else
         # Fall back to uname, e.g. "Linux <version>",
         # also works for BSD, Cygwin, MINGW, Darwin, etc.

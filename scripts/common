@@ -98,8 +98,8 @@ setSystemInfo() {
     elif [ -f /etc/SuSe-release ] || [ -f /etc/redhat-release ]; then
         # Older Red Hat, CentOS, etc.
         OS=GNU/Linux
-        DISTRO="$(grep -oP '^\w+' /etc/redhat-release)"
-        VER="$(grep -oP '\d+(\.\d+)*' /etc/redhat-release)"
+        DISTRO="$(grep -oE '^[a-zA-Z0-9_]+' /etc/redhat-release)"
+        VER="$(grep -oE '[0-9]+(\.[0-9]+)*' /etc/redhat-release)"
     else
         # Fall back to uname, e.g. "Linux <version>",
         # also works for BSD, Cygwin, MINGW, Darwin, etc.

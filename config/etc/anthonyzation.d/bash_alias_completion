@@ -360,7 +360,7 @@ _add_completion_for_alias() {
 
         # This decomposition is not perfect if the command has arguments
         # with whitespaces.
-        local cmd=( $(alias "${alias}" | grep -oP $'(?<=\').*(?=\')') )
+        local cmd=( $(alias "${alias}" | grep -o "'[^']*'" | tr -d "'") )
 
         # In case the alias is a replacement of a command (e.g. alias ls='ls --color=auto')
         if [ "${cmd[0]}" == "${oldProgram}" ]; then
@@ -373,7 +373,7 @@ _add_completion_for_alias() {
     # consists of a program name with no arguments. Git Bash doesn't seem to have
     # bash-completion functions, which are used by "_complete_alias".
     if [ "${#cmd[@]}" -eq 1 ] && complete -p "${program}" >/dev/null 2>&1; then
-        local program_completion="$(complete -p "${program}" | grep -oP '.*(?=\s+\S+$)') ${alias}"
+        local program_completion="$(complete -p "${program}" | sed -E 's/[[:space:]]+[^[:space:]]+$//') ${alias}"
         ${program_completion}
     else
         complete -F _complete_alias "${alias}"

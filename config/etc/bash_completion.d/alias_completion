@@ -14,6 +14,6 @@ completeAlias() {
     _add_completion_for_alias "${ALIAS}"
 }
 
-for alias in $(grep -Po '^alias\s+\w+(?==)' /etc/anthonyzation.d/bash.bash_aliases | grep -Po '(?<=\s)\w+'); do
+for alias in $(grep -oE 'alias[[:space:]]+[a-zA-Z0-9_]+' /etc/anthonyzation.d/bash.bash_aliases); do
     completeAlias "${alias}"
 done
