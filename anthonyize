@@ -23,7 +23,7 @@ checkWeAreRunningBash() {
 
 anthonyize() {
     if [ "$(whoami)" == root ]; then
-        messageError $'WARNING: Anthonyzation is running as root (did you use sudo?).'
+        messageError $'WARNING: Anthonyzation is running as root.'
         messageError $'The configurations will work but some will only apply to the'
         messageError $'root user, not to the unprivileged user. Note that you may'
         messageError $'want to do this so that a root shell will have your usual'

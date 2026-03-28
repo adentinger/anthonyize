@@ -115,7 +115,14 @@ superUserDo() {
     if [ "${OS}" == GNU/Linux ] || [ "${OS}" == Darwin ]; then
         # Linux/Mac machine
         if [ "$(whoami)" != root ]; then
-            sudo "$@"
+            if command -v sudo >/dev/null; then
+                sudo "$@"
+            elif command -v doas >/dev/null; then
+                doas "$@"
+            else
+                messageError $'ERROR: This script requires sudo or doas to run commands as super user.\n'
+                exit 1
+            fi
         else
             # Don't require password if we're already root.
             "$@"
