@@ -5,7 +5,11 @@
 # =                 https://github.com/AnthonyD973/Anthonyize                  =
 # ==============================================================================
 
-alias please='sudo'
+if command -v sudo >/dev/null; then
+	alias please='sudo'
+elif command -v doas >/dev/null; then
+	alias please='doas'
+fi
 
 alias cls='clear'
 
