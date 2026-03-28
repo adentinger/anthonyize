@@ -32,7 +32,7 @@ configureGit() {
         # Regularly performs Git cleanup stuff using e.g. a systemd unit:
         # https://blog.gitbutler.com/git-tips-2-new-stuff-in-git/#git-maintenance
         # This requires Git 2.29, so ignore it if it fails.
-        git maintenance start || true
+        git maintenance start 2>/dev/null || messageStatus "'git maintenance' not supported; skipping."
 
         git confg branch.sort -committerdate
         git confg color.ui auto
