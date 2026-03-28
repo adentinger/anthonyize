@@ -42,16 +42,25 @@ configureGit() {
         fi
 
         if command -v less >/dev/null; then
-            # Tabs stops are set one column from the left of the console,
-            # then every 4 columns. Good for 'git diff', where the first
-            # character is only to tell whether the line was deleted added,
-            # or unchanged.
-            #
-            # '-+F' makes sure to always page, even if there is one screen
-            # (I have a tendency to hit 'q' immediately after running
-            # 'git log', which types a literal 'q' on the command-line when
-            # 'git log' shows less than one page.)
-            git confg core.pager 'less -x1,5 -+F' || return
+            # Test whether "less -x" exists. "+q" to ask less to quit
+            # immediately.
+            if less -x1,5 +q "${EXCLUDES_FILE}" >/dev/null 2>&1; then
+                # Tabs stops are set one column from the left of the console,
+                # then every 4 columns. Good for 'git diff', where the first
+                # character is only to tell whether the line was deleted added,
+                # or unchanged.
+                #
+                # '-+F' makes sure to always page, even if there is one screen
+                # (I have a tendency to hit 'q' immediately after running
+                # 'git log', which types a literal 'q' on the command-line when
+                # 'git log' shows less than one page.)
+                git confg core.pager 'less -x1,5 -+F'
+            elif command -v less >/dev/null; then
+                # Less doesn't support -x (e.g. on Alpine Linux busybox less)
+                git confg core.pager 'less -+F'
+            else
+                messageStatus "'less' command not found in PATH; not configuring Git pager."
+            fi
         fi
 
         if [ "$OS" != GNU/Linux ] && [ "$OS" != Darwin ]; then
