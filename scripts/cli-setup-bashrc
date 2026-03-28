@@ -6,7 +6,13 @@ THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 source "${THIS_SCRIPT_DIR}/common"
 
 setupBashrc() {
-    local BASHRC_PLACES=("/etc/bashrc" "/etc/bash.bashrc" "/etc/bash.bashrc.local")
+    local BASHRC_PLACES=(
+        "/etc/bashrc"
+        # Ubuntu
+        "/etc/bash.bashrc"
+        "/etc/bash.bashrc.local"
+        # Alpine
+        "/etc/bash/bashrc")
     for bashrc in "${BASHRC_PLACES[@]}"; do
         if [ -f "${bashrc}" ]; then
             local BASHRC_FILE="${bashrc}"
