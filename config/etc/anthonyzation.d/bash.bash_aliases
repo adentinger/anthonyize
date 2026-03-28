@@ -2,7 +2,7 @@
 
 # ==============================================================================
 # =                      CREATED BY ANTHONYZATION SCRIPT                       =
-# =                 https://github.com/AnthonyD973/Anthonyize                  =
+# =                 https://github.com/adentinger/Anthonyize                  =
 # ==============================================================================
 
 if command -v sudo >/dev/null; then

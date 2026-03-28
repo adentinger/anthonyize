@@ -31,7 +31,7 @@ configureGit() {
         echo >> "${EXCLUDES_FILE}" || return
         echo '###########################################' >> "${EXCLUDES_FILE}" || return
         echo '# Written by Anthonyzation script' >> "${EXCLUDES_FILE}" || return
-        echo '# https://github.com/anthonyd973/anthonyize' >> "${EXCLUDES_FILE}" || return
+        echo '# https://github.com/adentinger/anthonyize' >> "${EXCLUDES_FILE}" || return
         echo '# VSCode config dir. Often useful on Git, but often not.' >> "${EXCLUDES_FILE}" || return
         echo '.vscode/' >> "${EXCLUDES_FILE}" || return
         echo '# Nano backup files' >> "${EXCLUDES_FILE}" || return

@@ -11,7 +11,7 @@ createFlagFile() {
 
     echo '# ==============================================================================' >> "${ANTHONYZATION_FLAG}"
     echo '# =                      CREATED BY ANTHONYZATION SCRIPT                       =' >> "${ANTHONYZATION_FLAG}"
-    echo '# =                 https://github.com/AnthonyD973/Anthonyize                  =' >> "${ANTHONYZATION_FLAG}"
+    echo '# =                 https://github.com/adentinger/Anthonyize                  =' >> "${ANTHONYZATION_FLAG}"
     echo '# ==============================================================================' >> "${ANTHONYZATION_FLAG}"
     echo >> "${ANTHONYZATION_FLAG}"
     echo 'The presence of this file indicates that the Anthonyzation script' >> "${ANTHONYZATION_FLAG}"
