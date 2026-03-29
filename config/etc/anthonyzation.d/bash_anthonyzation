@@ -52,8 +52,10 @@ if [ "$BASH_ANTHONYZATION_OS" != GNU/Linux ] && [ "$BASH_ANTHONYZATION_OS" != Da
     export PATH="/c/Windows/System32/OpenSSH:$PATH"
 fi
 
-# Set tab stops to each column multiple of 4.
-tabs 4
+if command -v tabs >/dev/null; then
+    # Set tab stops to each column multiple of 4.
+    tabs 4
+fi
 
 export EDITOR=nano
 
