@@ -64,7 +64,7 @@ configureGit() {
                     # 'git log' shows less than one page.)
                     less_cmd+=(-+F)
                 fi
-                git confg core.pager "${less_cmd[@]}"
+                git confg core.pager "${less_cmd[*]}"
             else
                 messageStatus "'less' command not found in PATH; not configuring Git pager."
             fi
