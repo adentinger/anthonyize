@@ -341,7 +341,8 @@ _complete_alias () {
     # Decrease _use_alias refcnt.
     (( _use_alias-- ))
 
-    # Reset this command's completion function to `_complete_alias`.
+    # Reset this command's completion function to `_complete_alias` then
+    # recursively call it again.
     complete -F _complete_alias "$cmd"
 }
 
