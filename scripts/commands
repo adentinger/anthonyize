@@ -173,6 +173,28 @@ add_ssh_fingerprint() {
     fi
 }
 
+add_ssh_gitsignkey() {
+    local signkey="${1}"
+    local allowed_signers_file="${2}"
+    local algo="$(echo "${signkey}" | awk '{print $1}')"
+    local current_allowed_signers="$(git config --global --get gpg.ssh.allowedSignersFile | tr -d $'\n' || echo -n "$allowed_signers_file")"
+    if [ "$current_allowed_signers" != "$allowed_signers_file" ]; then
+        messageError -n "Cannot add git signkey to '$allowed_signers_file': "
+        messageError -n "would have to override existing "
+        messageError "gpg.ssh.allowedSignersFile '$allowed_signers_file'."
+        exit 1
+    fi
+    local allowed_signers_line="$(git config --global --get user.email) namespaces=\"git\" ${signkey}"
+    if ! grep -qF "$allowed_signers_line" "${allowed_signers_file}"; then
+        echo "Adding git signkey (algo ${algo}) to ${allowed_signers_file}"
+        echo "${allowed_signers_line}" >> "${allowed_signers_file}"
+    fi
+    if [ ! -f "$allowed_signers_file" ]; then
+        touch "$allowed_signers_file"
+    fi
+    git config --global gpg.ssh.allowedSignersFile "$allowed_signers_file"
+}
+
 configureSsh() {
     # Check if open-ssh seems to be installed, otherwise skip installation
     if ! command -v add_ssh_fingerprint >/dev/null; then
@@ -199,9 +221,10 @@ configureSsh() {
 configureGitSignKey() {
     local PRIVATE_GIT_SIGN_KEY="$HOME/.anthonyize/id_ed25519_git_sign_key"
     local PUBLIC_GIT_SIGN_KEY="$PRIVATE_GIT_SIGN_KEY.pub"
+    local allowed_signers_file="$HOME/.ssh/allowed_signers"
     # Don't override existing key if it exists
     if ! [ -f "${PUBLIC_GIT_SIGN_KEY}" ]; then
-        # Using an SSH signing key requires Git 2.34 or later (which came out in
+        # Using SSH signing key requires Git 2.34 or later (which came out in
         # Nov 2021).
         if command -v ssh-keygen >/dev/null && command -v git >/dev/null; then
             mkdir -p "$(dirname "${PUBLIC_GIT_SIGN_KEY}")"
@@ -216,15 +239,24 @@ configureGitSignKey() {
             git config --global commit.gpgsign true
             git config --global tag.gpgSign true
             git config --global push.gpgSign "if-asked"
-            messageStatus "Git signing key generated (${PUBLIC_GIT_SIGN_KEY})."
+            if ! git config --global --get user.email >/dev/null; then
+                messageError -n "Cannot add git signkey to '$allowed_signers_file': "
+                messageError -n "git user email not set. Please set it with "
+                messageError -n "'git config --global user.email \"<email>\"' "
+                messageError -n "and run the anthonyize script again. This is "
+                messageError "not a fatal error; setup will continue."
+            fi
+            add_ssh_gitsignkey "$(cat "${PUBLIC_GIT_SIGN_KEY}" | tr -d $'\n')" "$allowed_signers_file"
+            messageStatus "Git sign key generated (${PUBLIC_GIT_SIGN_KEY})."
             messageStatus "You may add this public key to your GitHub/GitLab account:"
             messageStatus "On GitHub: https://github.com/settings/keys"
             messageStatus "On GitLab: https://gitlab.com/-/user_settings/ssh_keys"
         else
-            messageStatus "Skip generating Git signing key: 'ssh-keygen' or 'git' command not found in PATH."
+            messageStatus "Skip generating Git sign key: 'ssh-keygen' or 'git' command not found in PATH."
         fi
     else
-        messageStatus "Git signing key already exists: ${PUBLIC_GIT_SIGN_KEY}"
+        add_ssh_gitsignkey "$(cat "${PUBLIC_GIT_SIGN_KEY}" | tr -d $'\n')" "$allowed_signers_file"
+        messageStatus "Git sign key already exists: ${PUBLIC_GIT_SIGN_KEY}"
         messageStatus "As a reminder, you may add this public key to your GitHub/GitLab account:"
         messageStatus "On GitHub: https://github.com/settings/keys"
         messageStatus "On GitLab: https://gitlab.com/-/user_settings/ssh_keys"
