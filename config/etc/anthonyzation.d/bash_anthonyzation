@@ -57,6 +57,9 @@ if command -v tabs >/dev/null; then
     tabs 4
 fi
 
+# Allow pasting multi-line commands without executing them immediately.
+set enable-bracketed-paste on
+
 export EDITOR=nano
 
 # Makes the prompt look like an Ubuntu prompt
