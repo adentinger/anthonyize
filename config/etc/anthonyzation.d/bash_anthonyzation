@@ -61,6 +61,7 @@ fi
 set enable-bracketed-paste on
 
 export EDITOR=nano
+export HISTCONTROL=ignoreboth
 
 # Makes the prompt look like an Ubuntu prompt
 #
