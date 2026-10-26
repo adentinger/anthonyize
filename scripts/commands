@@ -199,7 +199,7 @@ add_ssh_gitsignkey() {
 
 configureSsh() {
     # Check if open-ssh seems to be installed, otherwise skip installation
-    if ! command -v add_ssh_fingerprint >/dev/null; then
+    if ! command -v ssh >/dev/null; then
         messageStatus 'Not configuring OpenSSH: doesn'"'"'t seem to be installed.'
         true
         return
