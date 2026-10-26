@@ -19,7 +19,7 @@ Appends code to the system-wide `bashrc`, no matter what exactly it is named.
 
 This is where we call the other scripts, and where we configure the prompt color.
 
-### `config/etc/bash.bash_aliases`
+### `config/etc/anthonyzation.d/bash.bash_aliases`
 
 To place your favorite aliases.
 
