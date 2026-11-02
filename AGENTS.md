@@ -93,10 +93,12 @@ docker run --rm -v "$PWD":/src:ro ubuntu:24.04 bash /src/tests/<test>
 - **Files under `config/etc/`:**
   - They run at the start of every interactive shell, so keep them quiet and
     fast, and make sure they never exit or fail.
-  - `installConfigFiles` rewrites each file in `config/etc/anthonyzation.d/`
-    with `sed`, replacing placeholders such as
-    `__COMPLETION_FUNCTION_BODY__`. Keep that directory flat, because the
-    destination path is built with `basename`.
+  - `installConfigFiles` overwrites each file in `config/etc/anthonyzation.d/`
+    on every run. Keep that directory flat, because the destination path is
+    built with `basename`.
+  - Detect the environment of an interactive shell (e.g. whether
+    bash-completion is loaded) when the code runs, not at install time:
+    `./anthonyize` runs non-interactively, without bash-completion.
   - `bash.bash_aliases` has to stay POSIX `sh` compatible. Define each alias
     on its own line as `alias name=...`, because `alias_completion` greps for
     that pattern to set up completion.

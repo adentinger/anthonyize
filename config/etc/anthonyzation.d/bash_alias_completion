@@ -9,8 +9,19 @@
 # ==============================================================================
 
 
+# Loads the completion of a command that isn't an alias. This is checked at
+# completion time rather than at install time because bash-completion is
+# usually loaded after this file (e.g. from ~/.bashrc). Without
+# bash-completion (e.g. on Git Bash), remove the command's completion: it is
+# _complete_alias, and keeping it would make _complete_alias call itself
+# forever for aliases of the same name (e.g. alias nano='nano -LwxET 4').
 _anthonyzation_default_completion_loader() {
-__COMPLETION_FUNCTION_BODY__
+    local cmd="${1}"
+    if declare -F _completion_loader >/dev/null; then
+        _completion_loader "${cmd}"
+    else
+        complete -r "${cmd}"
+    fi
 }
 
 # Copyright (C) 2016-2017 Cyker Way
