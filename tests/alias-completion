@@ -1,0 +1,68 @@
+#!/bin/bash -e
+
+# Checks that tab-completing aliases terminates and completes, including
+# aliases that wrap a command of the same name (e.g. alias nano='nano -LwxET 4').
+#
+# Run inside a throwaway container. Ubuntu 26.04 ships bash-completion 2.16,
+# with which the infinite recursion that used to hang 'nano <Tab>' shows up:
+#   docker run --rm -v "$PWD":/src:ro ubuntu:26.04 bash /src/tests/alias-completion
+
+export DEBIAN_FRONTEND=noninteractive
+apt-get update -qq >/dev/null
+apt-get install -y -qq git bash-completion nano expect >/dev/null
+
+cp -r /src /tmp/anthonyize
+cd /tmp/anthonyize
+./anthonyize </dev/null >/dev/null
+./anthonyize </dev/null >/dev/null
+
+# Like a user's ~/.bashrc, load bash-completion after the system bashrc.
+echo 'source /usr/share/bash-completion/bash_completion' >>"$HOME/.bashrc"
+
+mkdir -p /tmp/repo
+git -C /tmp/repo init -q
+touch /tmp/repo/somefile
+
+# Types the given text followed by Tab in an interactive bash running on a
+# pseudo-terminal, then waits for the expected text to show up.
+cat >/tmp/complete.exp <<'EOF'
+set timeout 10
+set typed [lindex $argv 0]
+set expected [lindex $argv 1]
+spawn -noecho bash -i
+send "PS1='RE''ADY> '\r"
+expect {
+    "READY> " {}
+    timeout { puts "\nbash didn't start"; exit 2 }
+}
+send "$typed\t"
+expect {
+    -ex $expected { exit 0 }
+    timeout { puts "\ntimed out"; exit 1 }
+}
+EOF
+
+failures=0
+
+# EXPECTED PARAMS:
+# 1: the command line to complete
+# 2: the text that the completion must show
+checkCompletion() {
+    local typed="${1}"
+    local expected="${2}"
+    local output
+    if output="$(cd /tmp/repo && TERM=dumb expect /tmp/complete.exp "${typed}" "${expected}" 2>&1)"; then
+        echo "OK: completing '${typed}'"
+    else
+        echo "FAIL: completing '${typed}' didn't show '${expected}':" >&2
+        echo "${output}" >&2
+        failures=$(( failures + 1 ))
+    fi
+}
+
+checkCompletion 'nano some' 'nano somefile'
+checkCompletion 'll some' 'll somefile'
+checkCompletion 'g push --force-w' 'g push --force-with-lease'
+checkCompletion 'git push --force-w' 'git push --force-with-lease'
+
+[ "${failures}" -eq 0 ]
