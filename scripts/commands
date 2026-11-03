@@ -84,6 +84,8 @@ configureGit() {
         git confg fetch.writeCommitGraph true
         git confg init.defaultBranch main
         git confg push.default simple
+        # Begone 'git push -u'!
+        git confg push.autoSetupRemote true
 
         # Aliases
         git confg alias.a 'add -A'
