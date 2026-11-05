@@ -15,7 +15,8 @@ configureGit() {
         echo '###########################################' >> "${EXCLUDES_FILE}" || return
         echo '# Written by Anthonyzation script' >> "${EXCLUDES_FILE}" || return
         echo '# https://github.com/adentinger/anthonyize' >> "${EXCLUDES_FILE}" || return
-        echo '# VSCode config dir. Often useful on Git, but often not.' >> "${EXCLUDES_FILE}" || return
+        echo "# VSCode config dir. Often just a local setup; let's un-ignore it specifically" >> "${EXCLUDES_FILE}" || return
+        echo '# for repos that should have it committed.' >> "${EXCLUDES_FILE}" || return
         echo '.vscode/' >> "${EXCLUDES_FILE}" || return
         echo '# Nano backup files' >> "${EXCLUDES_FILE}" || return
         echo '*.bak' >> "${EXCLUDES_FILE}" || return
@@ -26,6 +27,12 @@ configureGit() {
         echo '# CMake Presets for user --not meant to be in repos:' >> "${EXCLUDES_FILE}" || return
         echo '# https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html#introduction' >> "${EXCLUDES_FILE}" || return
         echo 'CMakeUserPresets.json' >> "${EXCLUDES_FILE}" || return
+        echo '# OpenOffice/LibreOffice lockfiles' >> "${EXCLUDES_FILE}" || return
+        echo '.~lock.*#' >> "${EXCLUDES_FILE}" || return
+        echo '# Local LLM agent settings' >> "${EXCLUDES_FILE}" || return
+        echo 'AGENTS.local.md' >> "${EXCLUDES_FILE}" || return
+        echo '.claude/settings.local.json' >> "${EXCLUDES_FILE}" || return
+        echo '.claude.local/' >> "${EXCLUDES_FILE}" || return
         echo '# Issue resolution checklists' >> "${EXCLUDES_FILE}" || return
         echo 'TODO-*.md' >> "${EXCLUDES_FILE}" || return
         echo 'TODO_*.md' >> "${EXCLUDES_FILE}" || return
