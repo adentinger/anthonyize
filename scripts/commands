@@ -28,6 +28,7 @@ configureGit() {
         echo 'CMakeUserPresets.json' >> "${EXCLUDES_FILE}" || return
         echo '# Issue resolution checklists' >> "${EXCLUDES_FILE}" || return
         echo 'TODO-*.md' >> "${EXCLUDES_FILE}" || return
+        echo 'TODO_*.md' >> "${EXCLUDES_FILE}" || return
         echo '###########################################' >> "${EXCLUDES_FILE}" || return
         git confg core.excludesfile "${EXCLUDES_FILE}"
 
